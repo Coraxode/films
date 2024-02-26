@@ -2,8 +2,7 @@ from django.db import models
 
 
 class Director(models.Model):
-    first_name = models.CharField(max_length=60, help_text="Director first name")
-    last_name = models.CharField(max_length=60, help_text="Director last name")
+    name = models.CharField(max_length=100, help_text="Director name", default=None)
     
     class Meta:
         db_table = 'director'
@@ -11,12 +10,11 @@ class Director(models.Model):
         verbose_name_plural = 'directors'
 
     def __str__(self):
-        return f'{self.first_name} {self.last_name}'
+        return self.name
 
 
 class Actor(models.Model):
-    first_name = models.CharField(max_length=60, help_text="Actor first name")
-    last_name = models.CharField(max_length=60, help_text="Actor last name")
+    name = models.CharField(max_length=100, help_text="Actor name", default=None)
     
     class Meta:
         db_table = 'actor'
@@ -24,7 +22,7 @@ class Actor(models.Model):
         verbose_name_plural = 'actors'
 
     def __str__(self):
-        return f'{self.first_name} {self.last_name}'
+        return self.name
 
 
 class Film(models.Model):

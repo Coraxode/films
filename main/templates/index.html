@@ -2,8 +2,17 @@
 {% load static %}
 
 {% block content %}
-<form action="{% url 'films:fill_data' %}" method="POST">
-    {% csrf_token %}
-    <input type='submit' class="fill-data-button" value="Заповнити дані">
-</form>
+    <form action="{% url 'films:fill_data' %}" method="POST" style="display: none;">
+        {% csrf_token %}
+        <input type='submit' class="fill-data-button" value="Заповнити дані">
+    </form>
+{% for film in films %}
+    <div class='main-content'>
+        <p>{{ film.name }}</p>
+        <p>Year: {{ film.year_of_release }}</p>
+        <p>Director: {{ film.director }}</p>
+        <p>Actors: {% for actor in film.actors.all %}{{ actor }}, {% endfor %}</p>
+        <a href="{% url 'films:delete' film_id=film.id %}" class='delete-film-button'>Delete</a>
+    </div>
+{% endfor %}
 {% endblock %}

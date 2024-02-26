@@ -1,3 +1,4 @@
+from django.shortcuts import get_object_or_404
 import requests
 from .models import Director, Actor, Film
 from django.conf import settings
@@ -16,15 +17,18 @@ def fill_data():
         params = {'apikey': settings.OMDB_API_KEY, 'i': id}
         data = requests.get(url, params=params).json()
         
-        director_name = data['Director'].split(' ')
         film = Film.objects.create(
             name=data['Title'],
             year_of_release=data['Year'],
-            director=Director.objects.get_or_create(first_name=director_name[0], last_name=director_name[1])[0],
+            director=Director.objects.get_or_create(name=data['Director'])[0],
         )
         
         actors_list = data['Actors'].split(', ')
-        for actor in actors_list:
-            actor_name = actor.split(' ')
-            actor = Actor.objects.get_or_create(first_name=actor_name[0], last_name=actor_name[1])[0]
+        for actor_name in actors_list:
+            actor = Actor.objects.get_or_create(name=actor_name)[0]
             film.actors.add(actor)
+
+
+def delete_film_from_db(film_id):
+    film = get_object_or_404(Film, id=film_id)
+    film.delete()

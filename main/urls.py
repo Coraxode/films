@@ -6,5 +6,6 @@ app_name = 'films'
 
 urlpatterns = [
     path('', views.index, name='index'),
-    path('fill_data/', views.fill_database, name='fill_data')
+    path('fill_data/', views.fill_database, name='fill_data'),
+    path('<int:film_id>/delete/', views.delete_film, name='delete'),
 ]

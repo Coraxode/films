@@ -5,6 +5,7 @@ body, input, textarea, select {
 
 body {
     margin: 0px;
+    background-color: grey;
 }
 
 .main-header {
