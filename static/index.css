@@ -1,7 +1,52 @@
 .main-content {
-    margin: 15px auto;
     width: 63%;
+    margin: 15px auto;
+}
+
+.film-info,
+.add-film-form {
+    margin: 15px auto;
     padding: 1px 15px;
     background-color: pink;
     border-radius: 15px;
+}
+
+.film-info p {
+    display: inline-block;
+}
+
+.add-film-form {
+    display: none;
+    background-color: red;
+}
+
+.list-pages {
+	text-align: center;
+	margin: 0 0 20px 0;
+}
+.list-pages ul {
+	margin: 20px 0 0 0;
+	padding: 0;
+	list-style: none;
+}
+.list-pages ul li {
+	display: inline-block;
+	margin: 0 20px 0 0;
+}
+.list-pages a {
+	color: #000;
+	font-size: 24px;
+	text-decoration: none;
+}
+.list-pages .page-num {
+	display: inline-block;
+	width: 60px;
+	height: 44px;
+	padding: 16px 0 0 0;
+	border: 1px solid #d0d0d0;
+	border-radius: 30px;
+}
+.page-num:hover {
+    cursor: pointer;
+    background-color: rgb(65, 64, 64);
 }

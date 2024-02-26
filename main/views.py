@@ -1,15 +1,14 @@
-from django.shortcuts import redirect, render
+from django.views.generic import ListView
+from django.shortcuts import redirect
 from .services import fill_data, delete_film_from_db
 from .models import Film
 
 
-def index(request):
-    context = {
-        'title': 'Films',
-        'films': Film.objects.all(),
-    }
-    
-    return render(request, 'index.html', context)
+class index(ListView):
+    template_name = 'index.html'
+    context_object_name = 'films'
+    queryset = Film.objects.all()
+    paginate_by = 25
 
 
 def fill_database(request):

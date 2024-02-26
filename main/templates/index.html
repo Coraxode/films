@@ -2,17 +2,40 @@
 {% load static %}
 
 {% block content %}
+<div class='main-content'>
     <form action="{% url 'films:fill_data' %}" method="POST" style="display: none;">
         {% csrf_token %}
         <input type='submit' class="fill-data-button" value="Заповнити дані">
     </form>
-{% for film in films %}
-    <div class='main-content'>
-        <p>{{ film.name }}</p>
-        <p>Year: {{ film.year_of_release }}</p>
-        <p>Director: {{ film.director }}</p>
-        <p>Actors: {% for actor in film.actors.all %}{{ actor }}, {% endfor %}</p>
-        <a href="{% url 'films:delete' film_id=film.id %}" class='delete-film-button'>Delete</a>
-    </div>
-{% endfor %}
+    {% comment %} <input type="button" onclick="open_add_film_menu()" value="Add new film" id="add-new-film-button">
+    <form action="" method="POST" class='add-film-form' id='add-film-form'>
+        {% csrf_token %}
+        <label for="name">Film name:</label>
+        <input type="text" name="name" placeholder="Film Name"><br>
+        <label for="name">Year:</label>
+        <input type="text" name="year" placeholder="Year"><br>
+        <label for="name">Director:</label>
+        <input type="text" name="director" placeholder="Director"><br>
+        <label for="name">Actors:</label>
+        <input type="text" name="actors" placeholder="Actors"><br>
+        <input type="submit" value="Add new film">
+    </form> {% endcomment %}
+    {% for film in films %}
+        <div class='film-info'>
+            <p>{{ film.name }}, {{ film.year_of_release }}</p>
+            <p>Director: {{ film.director }}</p>
+            <p>Actors: {% for actor in film.actors.all %}{{ actor }}, {% endfor %}</p>
+            {% comment %} <a href="{% url 'films:delete' film_id=film.id %}" class='delete-film-button'>Delete</a> {% endcomment %}
+        </div>
+    {% endfor %}
+    <nav class="list-pages">
+        <ul>
+            {% for page in paginator.page_range %}
+                <li class="page-num" onclick="location.href='?page={{ page }}';">
+                    <a>{{ page }}</a>
+                </li>
+            {% endfor %}
+        </ul>
+    </nav>
+</div>
 {% endblock %}
