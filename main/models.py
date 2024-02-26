@@ -18,6 +18,7 @@ class Actor(models.Model):
     
     class Meta:
         db_table = 'actor'
+        ordering = ['name']
         verbose_name = 'actor'
         verbose_name_plural = 'actors'
 

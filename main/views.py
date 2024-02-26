@@ -1,14 +1,26 @@
+from typing import Any
+from django.db.models.query import QuerySet
 from django.views.generic import ListView
 from django.shortcuts import redirect
 from .services import fill_data, delete_film_from_db
+from .filters import FilmFilter
 from .models import Film
 
 
 class index(ListView):
     template_name = 'index.html'
     context_object_name = 'films'
-    queryset = Film.objects.all()
     paginate_by = 25
+    
+    def get_queryset(self) -> QuerySet[Any]:
+        self.film_filter = FilmFilter(self.request.GET, queryset=Film.objects.all())
+        return self.film_filter.qs
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['title'] = 'Films'
+        context['form'] = self.film_filter.form
+        return context
 
 
 def fill_database(request):

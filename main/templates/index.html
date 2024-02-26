@@ -20,6 +20,10 @@
         <input type="text" name="actors" placeholder="Actors"><br>
         <input type="submit" value="Add new film">
     </form> {% endcomment %}
+    <form method="GET" action="{% url 'films:index' %}">
+        {{ form.as_p }}
+        <input type="submit" value="Submit">
+    </form>
     {% for film in films %}
         <div class='film-info'>
             <p>{{ film.name }}, {{ film.year_of_release }}</p>
