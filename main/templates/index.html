@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<form action="{% url 'films:fill_data' %}" method="POST">
+    {% csrf_token %}
+    <input type='submit' class="fill-data-button" value="Заповнити дані">
+</form>
+{% endblock %}

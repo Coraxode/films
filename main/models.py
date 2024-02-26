@@ -39,4 +39,4 @@ class Film(models.Model):
         verbose_name_plural = 'films'
 
     def __str__(self):
-        return f'{self.first_name} {self.last_name}'
+        return self.name

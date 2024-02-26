@@ -1,3 +1,15 @@
-from django.shortcuts import render
+from django.shortcuts import redirect, render
+from .services import fill_data
 
-# Create your views here.
+
+def index(request):
+    context = {
+        'title': 'Films'
+    }
+    
+    return render(request, 'index.html', context)
+
+
+def fill_database(request):
+    fill_data()
+    return redirect('films:index')
