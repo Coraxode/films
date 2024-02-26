@@ -5,4 +5,8 @@ from .models import Film
 class FilmFilter(django_filters.FilterSet):
     class Meta:
         model = Film
-        fields = ['year_of_release', 'director', 'actors']
+        fields = {
+            'year_of_release': ['lt', 'gt'],
+            'director': ['exact'],
+            'actors': ['exact']
+        }

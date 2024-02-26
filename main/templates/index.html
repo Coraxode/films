@@ -2,44 +2,40 @@
 {% load static %}
 
 {% block content %}
+<div class='filters-content'>
+    <form method="GET" action="{% url 'films:index' %}">
+        <label for="year_of_release__lt">Year: </label>
+        {{ form.year_of_release__gt }}<a> - </a>
+        {{ form.year_of_release__lt }}<br>
+        <label for="director">Director: </label>
+        {{ form.director }}<br>
+        <label for="actors">Actors <span>(Hold CTRL to select more then one):</span> </label><br>
+        {{ form.actors }}<br>
+        <input type="submit" value="Submit">
+    </form>
+</div>
 <div class='main-content'>
     <form action="{% url 'films:fill_data' %}" method="POST" style="display: none;">
         {% csrf_token %}
         <input type='submit' class="fill-data-button" value="Заповнити дані">
     </form>
-    {% comment %} <input type="button" onclick="open_add_film_menu()" value="Add new film" id="add-new-film-button">
-    <form action="" method="POST" class='add-film-form' id='add-film-form'>
-        {% csrf_token %}
-        <label for="name">Film name:</label>
-        <input type="text" name="name" placeholder="Film Name"><br>
-        <label for="name">Year:</label>
-        <input type="text" name="year" placeholder="Year"><br>
-        <label for="name">Director:</label>
-        <input type="text" name="director" placeholder="Director"><br>
-        <label for="name">Actors:</label>
-        <input type="text" name="actors" placeholder="Actors"><br>
-        <input type="submit" value="Add new film">
-    </form> {% endcomment %}
-    <form method="GET" action="{% url 'films:index' %}">
-        {{ form.as_p }}
-        <input type="submit" value="Submit">
-    </form>
     {% for film in films %}
         <div class='film-info'>
-            <p>{{ film.name }}, {{ film.year_of_release }}</p>
-            <p>Director: {{ film.director }}</p>
-            <p>Actors: {% for actor in film.actors.all %}{{ actor }}, {% endfor %}</p>
-            {% comment %} <a href="{% url 'films:delete' film_id=film.id %}" class='delete-film-button'>Delete</a> {% endcomment %}
+            <a>{{ film.name }}, {{ film.year_of_release }}</a><br>
+            <a>Director: {{ film.director }}</a><br>
+            <a class="actors-list">Actors: {% for actor in film.actors.all %}{{ actor }}, {% endfor %}</a>
         </div>
     {% endfor %}
-    <nav class="list-pages">
-        <ul>
-            {% for page in paginator.page_range %}
-                <li class="page-num" onclick="location.href='?page={{ page }}';">
-                    <a>{{ page }}</a>
-                </li>
-            {% endfor %}
-        </ul>
-    </nav>
+    {% if not paginator.num_pages == 1 %}
+        <nav class="list-pages">
+            <ul>
+                {% for page in paginator.page_range %}
+                    <li class="page-num" onclick="location.href='?page={{ page }}';">
+                        <a>{{ page }}</a>
+                    </li>
+                {% endfor %}
+            </ul>
+        </nav>
+    {% endif %}
 </div>
 {% endblock %}

@@ -1,3 +1,39 @@
+.filters-content {
+	position: fixed;
+	padding: 15px;
+	margin: 5px 2px;
+    left: 15px; 
+    top: 60px; 
+    width: 15%;
+	color: white;
+    border-radius: 15px;
+	border: 2px solid rgb(84, 31, 133);
+}
+
+.filters-content label, input, select {
+	margin: 5px auto;
+	max-width: 80%;
+	color: white;
+}
+
+.filters-content input, select {
+	background-color: transparent;
+	border: 1px solid rgb(84, 31, 133);
+	border-radius: 5px;
+}
+
+.filters-content span {
+	font-size: 12px;
+}
+
+.filters-content #id_director option {
+	color: black;
+}
+
+.filters-content select {
+	width: 80%
+}
+
 .main-content {
     width: 63%;
     margin: 15px auto;
@@ -6,9 +42,11 @@
 .film-info,
 .add-film-form {
     margin: 15px auto;
-    padding: 1px 15px;
-    background-color: pink;
+    padding: 5px 15px;
+    /* background: linear-gradient(to right, rgb(18, 12, 54), 90%, rgb(27, 73, 80)); */
+	color: white;
     border-radius: 15px;
+	border: 2px solid rgb(84, 31, 133);
 }
 
 .film-info p {
@@ -34,19 +72,63 @@
 	margin: 0 20px 0 0;
 }
 .list-pages a {
-	color: #000;
+	color: white;
 	font-size: 24px;
 	text-decoration: none;
+	margin-bottom: 15px;
 }
 .list-pages .page-num {
 	display: inline-block;
 	width: 60px;
 	height: 44px;
 	padding: 16px 0 0 0;
-	border: 1px solid #d0d0d0;
+	border: 1px solid rgb(84, 31, 133);
 	border-radius: 30px;
 }
 .page-num:hover {
     cursor: pointer;
-    background-color: rgb(65, 64, 64);
+    background-color: black;
 }
+
+#id_year_of_release__lt, #id_year_of_release__gt {
+	width: 70px;
+	text-align: center;
+}
+
+#id_director {
+	width: 150px;
+}
+
+#id_actors {
+	height: 500px;
+}
+
+#id_actors option {
+	margin-left: 5px;
+}
+
+#id_year_of_release__lt::-webkit-inner-spin-button, 
+#id_year_of_release__gt::-webkit-inner-spin-button,
+#id_year_of_release__lt::-webkit-outer-spin-button, 
+#id_year_of_release__gt::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type=number] {
+  -moz-appearance: textfield;
+}
+
+::-webkit-scrollbar {
+	width: 10px;
+	height: 10px;
+}
+  
+::-webkit-scrollbar-thumb {
+	background: rgb(189, 150, 226);
+	border-radius: 5px;
+}
+  
+/* ::-webkit-scrollbar-track {
+	background: rgba(0, 0, 0, 0.2);
+} */

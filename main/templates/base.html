@@ -12,12 +12,14 @@
     <script src="{% static '/scripts.js' %}"></script>
 </head>
 <body>
+    {% comment %} <div class="background"></div> {% endcomment %}
     <header class="main-header">
         <a href="{% url 'films:index' %}" class="films-label-in-header">Films</a>
         </div>
     </header>
     <main>
         {% block content %}{% endblock %}
+        <script>change_actors_list()</script>
     </main>
 </body>
 </html>

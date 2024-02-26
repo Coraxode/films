@@ -6,6 +6,7 @@ class Director(models.Model):
     
     class Meta:
         db_table = 'director'
+        ordering = ['name']
         verbose_name = 'director'
         verbose_name_plural = 'directors'
 
