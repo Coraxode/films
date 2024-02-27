@@ -2,8 +2,6 @@
 
 Website with list of films.
 
-If there are no films on the main page, click the "Fill data" button under filters.
-
 ### Usage
 * configure ```.env``` file
 * create and configure vitrual environment:

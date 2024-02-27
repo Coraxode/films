@@ -14,15 +14,11 @@ def fill_or_clear_data(action):
                'tt0102926', 'tt0120815', 'tt0317248', 'tt0118799', 'tt0120689',
                'tt0103064', 'tt0076759', 'tt0088763', 'tt0245429', 'tt0253474',]
         url = "http://www.omdbapi.com/"
-        threads = []
 
         for id in ids:
-            thread = threading.Thread(target=_get_film_data_and_create_film, args=(id, url, ))
-            threads.append(thread)
-            thread.start()
-        
-        for thread in threads:
-            thread.join()
+            params = {'apikey': settings.OMDB_API_KEY, 'i': id}
+            data = requests.get(url, params=params).json()
+            _create_or_change_film(data['Title'], data['Year'], data['Director'], data['Actors'])
 
     elif action == 'clear':
         Film.objects.all().delete()
@@ -59,10 +55,3 @@ def _create_or_change_film(name, year, director, actors, id=None):
     for actor_name in actors_list:
         actor = Actor.objects.get_or_create(name=actor_name)[0]
         film.actors.add(actor)
-
-
-def _get_film_data_and_create_film(id, url):
-    params = {'apikey': settings.OMDB_API_KEY, 'i': id}
-    data = requests.get(url, params=params).json()
-    
-    _create_or_change_film(data['Title'], data['Year'], data['Director'], data['Actors'])
