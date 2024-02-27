@@ -1,7 +1,5 @@
-from typing import Any
 from django.db.models.query import QuerySet
 from django.views.generic import ListView
-from django.views.generic.edit import CreateView
 from django.shortcuts import redirect
 from .services import fill_data, delete_film_from_db, add_film_to_db
 from .filters import FilmFilter
@@ -13,7 +11,7 @@ class index(ListView):
     context_object_name = 'films'
     paginate_by = 25
     
-    def get_queryset(self) -> QuerySet[Any]:
+    def get_queryset(self):
         self.film_filter = FilmFilter(self.request.GET, queryset=Film.objects.all())
         return self.film_filter.qs
     

@@ -17,11 +17,11 @@ def fill_data():
         params = {'apikey': settings.OMDB_API_KEY, 'i': id}
         data = requests.get(url, params=params).json()
         
-        create_or_change_film(data['Title'], data['Year'], data['Director'], data['Actors'])
+        _create_or_change_film(data['Title'], data['Year'], data['Director'], data['Actors'])
 
 
 def add_film_to_db(data):
-    create_or_change_film(data.get('name'), data.get('year'), data.get('director'), data.get('actors'), data.get('id'))
+    _create_or_change_film(data.get('name'), data.get('year_of_release'), data.get('director'), data.get('actors'), data.get('id'))
 
 
 def delete_film_from_db(film_id):
@@ -29,7 +29,7 @@ def delete_film_from_db(film_id):
     film.delete()
 
 
-def create_or_change_film(name, year, director, actors, id=None):
+def _create_or_change_film(name, year, director, actors, id=None):
     if id:
         film = Film.objects.get(id=id)
         film.name = name
