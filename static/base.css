@@ -9,25 +9,32 @@ body {
     min-height: 100vh;
 }
 
-/* .background {
-    position: absolute;
-    top: 0px;
-    z-index: 0;
-    width: 100%;
-    height: 5000px;
-    background: linear-gradient(black, 5%, rgb(2, 2, 71));
-} */
-
 .main-header {
     display: flex;
     height: 50px;
-    /* border-bottom: 1px dotted pink; */
 }
 
 .films-label-in-header {
-    margin: auto 0 auto 18%;
+    margin: auto 0 auto 19%;
     text-decoration: none;
     color: white;
     font-size: 23px;
     font-weight: 550;
+}
+
+.add-new-in-header {
+    font-size: 22px;
+    font-weight: 550;
+    color: white;
+    top: 5px;
+    padding: 7px;
+    position: relative;
+    border: 2px solid rgb(84, 31, 133);
+    border-radius: 10px;
+    margin-left: 53%;
+    cursor: pointer;
+}
+
+.add-new-in-header:hover {
+    background-color: rgb(34, 12, 31);
 }

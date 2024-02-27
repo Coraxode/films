@@ -40,22 +40,82 @@
 }
 
 .film-info,
-.add-film-form {
+.add-form {
     margin: 15px auto;
     padding: 5px 15px;
-    /* background: linear-gradient(to right, rgb(18, 12, 54), 90%, rgb(27, 73, 80)); */
 	color: white;
     border-radius: 15px;
 	border: 2px solid rgb(84, 31, 133);
+}
+
+.add-from input[type=submit] {
+	cursor: pointer;
 }
 
 .film-info p {
     display: inline-block;
 }
 
-.add-film-form {
-    display: none;
-    background-color: red;
+.film-info *,
+.add-form * {
+	background-color: transparent;
+}
+
+.film-info input,
+.add-form input {
+	border: 2px solid rgb(84, 31, 133);
+	border-radius: 5px;
+}
+
+.delete-film-button,
+.change-film-button,
+.close-add-form-button {
+	float: right;
+	border: 1px solid red;
+	border-radius: 5px;
+	padding: 3px 5px;
+	text-decoration: none;
+	color: white;
+	cursor: pointer;
+}
+
+.change-film-button {
+	margin-right: 10px;
+	border: 1px solid rgb(59, 56, 23);
+}
+
+.delete-film-button:hover {
+	background-color: rgb(97, 14, 14);
+}
+
+.change-film-button:hover {
+	background-color: rgb(94, 89, 35);
+}
+
+.add-form {
+	display: none;
+	/* overflow: hidden; */
+}
+
+.add-film-form,
+.add-director-actor-form {
+	flex: 1;
+}
+
+.add-film-form a,
+.add-director-actor-form a {
+	font-size: 25px;
+}
+
+.add-director-actor-form {
+	margin-left: 50px;
+	display: none;
+	width: 95%;
+}
+
+.close-add-form-button {
+	font-size: 15px;
+	float: right;
 }
 
 .list-pages {
@@ -128,7 +188,3 @@ input[type=number] {
 	background: rgb(189, 150, 226);
 	border-radius: 5px;
 }
-  
-/* ::-webkit-scrollbar-track {
-	background: rgba(0, 0, 0, 0.2);
-} */

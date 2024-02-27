@@ -19,18 +19,56 @@
         {% csrf_token %}
         <input type='submit' class="fill-data-button" value="Заповнити дані">
     </form>
+    <div class="add-form" id="add_form">
+        <form action="{% url 'films:add' %}" method="POST" id="adding-form">
+            {% csrf_token %}
+            <div class='add-film-form'>
+                <a>Add film</a><br>
+                <label for='name'>Film name: </label>
+                <input type='text' name='name' style="margin-left: 50px;"><br>
+                <label for='name'>Year: </label>
+                <input type='number' name='year' style="margin-left: 95px;"><br>
+                <label for='director'>Director: </label>
+                <input type='text' name='director' style="margin-left: 68px;"><br>
+                <label for='actors'>Actors: </label>
+                <input type='text' name='actors'  style="margin-left: 80px;"><br>
+                <input type='submit' class="add-film-button" value="Add film">
+            </div>
+        </form>
+        <form action="{% url 'films:add' %}" method="POST" id="adding-form">
+            {% csrf_token %}
+            <div class='add-director-actor-form' id='id_add_director_actor_form'>
+                <a id='id_a_change_film'>Change film</a>
+                <a class='close-add-form-button' onclick="activate_add_form()">X</a><br>
+                <label for='name'>Film name: </label>
+                <input type='text' name='name' id='id_change_film_name' style="margin-left: 50px;"><br>
+                <label for='name'>Year: </label>
+                <input type='number' name='year' id='id_change_film_year' style="margin-left: 95px;"><br>
+                <label for='director'>Director: </label>
+                <input type='text' name='director' id='id_change_film_director' style="margin-left: 68px;"><br>
+                <label for='actors'>Actors: </label>
+                <input type='text' name='actors' id='id_change_film_actors'  style="margin-left: 80px;"><br>
+                <input type='hidden' name='id' id='id_change_film_id'>
+                <input type='submit' class="add-film-button" value="Change">
+            </div>
+        </form>
+    </div>
+    
     {% for film in films %}
         <div class='film-info'>
-            <a>{{ film.name }}, {{ film.year_of_release }}</a><br>
+            <input type="hidden" id="id_film_{{ film.id }}_name" value="{{ film.name }}">
+            <a>{{ film.name }}, {{ film.year_of_release }}</a>
+            <a href="{% url 'films:delete' film_id=film.id %}" class='delete-film-button'>Delete</a>
+            <a class='change-film-button' onclick="activate_change_form('{{ film.id }}', '{{ film.year_of_release }}', '{{ film.director }}')">Change</a><br>
             <a>Director: {{ film.director }}</a><br>
-            <a class="actors-list">Actors: {% for actor in film.actors.all %}{{ actor }}, {% endfor %}</a>
+            <a class="actors-list" id="id_film_{{ film.id }}_actors">Actors: {% for actor in film.actors.all %}{{ actor }}, {% endfor %}</a>
         </div>
     {% endfor %}
     {% if not paginator.num_pages == 1 %}
         <nav class="list-pages">
             <ul>
                 {% for page in paginator.page_range %}
-                    <li class="page-num" onclick="location.href='?page={{ page }}';">
+                    <li class="page-num" onclick="change_page({{ page }})">
                         <a>{{ page }}</a>
                     </li>
                 {% endfor %}

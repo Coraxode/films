@@ -17,18 +17,35 @@ def fill_data():
         params = {'apikey': settings.OMDB_API_KEY, 'i': id}
         data = requests.get(url, params=params).json()
         
-        film = Film.objects.create(
-            name=data['Title'],
-            year_of_release=data['Year'],
-            director=Director.objects.get_or_create(name=data['Director'])[0],
-        )
-        
-        actors_list = data['Actors'].split(', ')
-        for actor_name in actors_list:
-            actor = Actor.objects.get_or_create(name=actor_name)[0]
-            film.actors.add(actor)
+        create_or_change_film(data['Title'], data['Year'], data['Director'], data['Actors'])
+
+
+def add_film_to_db(data):
+    create_or_change_film(data.get('name'), data.get('year'), data.get('director'), data.get('actors'), data.get('id'))
 
 
 def delete_film_from_db(film_id):
     film = get_object_or_404(Film, id=film_id)
     film.delete()
+
+
+def create_or_change_film(name, year, director, actors, id=None):
+    if id:
+        film = Film.objects.get(id=id)
+        film.name = name
+        film.year_of_release = year
+        film.director = Director.objects.get_or_create(name=director)[0]
+        for actor in film.actors.all():
+            film.actors.remove(actor)
+        film.save()
+    else:
+        film = Film.objects.create(
+            name=name,
+            year_of_release=year,
+            director=Director.objects.get_or_create(name=director)[0],
+        )
+    
+    actors_list = actors.split(', ')
+    for actor_name in actors_list:
+        actor = Actor.objects.get_or_create(name=actor_name)[0]
+        film.actors.add(actor)

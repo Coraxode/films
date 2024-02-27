@@ -1,8 +1,9 @@
 from typing import Any
 from django.db.models.query import QuerySet
 from django.views.generic import ListView
+from django.views.generic.edit import CreateView
 from django.shortcuts import redirect
-from .services import fill_data, delete_film_from_db
+from .services import fill_data, delete_film_from_db, add_film_to_db
 from .filters import FilmFilter
 from .models import Film
 
@@ -25,6 +26,11 @@ class index(ListView):
 
 def fill_database(request):
     fill_data()
+    return redirect('films:index')
+
+
+def add_film(request):
+    add_film_to_db(request.POST)
     return redirect('films:index')
 
 
