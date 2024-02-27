@@ -35,6 +35,7 @@ class Film(models.Model):
 
     class Meta:
         db_table = 'film'
+        ordering = ['id']
         verbose_name = 'film'
         verbose_name_plural = 'films'
 

@@ -11,14 +11,16 @@
         {{ form.director }}<br>
         <label for="actors">Actors <span>(Hold CTRL to select more then one):</span> </label><br>
         {{ form.actors }}<br>
-        <input type="submit" value="Submit">
+        <input type="submit" value="Submit"><br><br><br>
     </form>
+    <a class="fill-data-button" href="{% url 'films:change_data' action="fill"%}">Fill data</a>
+    <a class="clear-data-button" href="{% url 'films:change_data' action="clear"%}">Clear data</a>
 </div>
 <div class='main-content'>
-    <form action="{% url 'films:fill_data' %}" method="POST" style="display: none;">
+    {% comment %} <form action="{% url 'films:fill_data' %}" method="POST" style="display: none;">
         {% csrf_token %}
-        <input type='submit' class="fill-data-button" value="Заповнити дані">
-    </form>
+        <input type='submit' class="fill-data-button" value="Fill data">
+    </form> {% endcomment %}
     <div class="add-form" id="add_form">
         <form action="{% url 'films:add' %}" method="POST" id="adding-form">
             {% csrf_token %}

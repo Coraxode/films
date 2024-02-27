@@ -1,7 +1,6 @@
-from django.db.models.query import QuerySet
 from django.views.generic import ListView
 from django.shortcuts import redirect
-from .services import fill_data, delete_film_from_db, add_film_to_db
+from .services import fill_or_clear_data, delete_film_from_db, add_film_to_db
 from .filters import FilmFilter
 from .models import Film
 
@@ -22,8 +21,8 @@ class index(ListView):
         return context
 
 
-def fill_database(request):
-    fill_data()
+def change_data(request, action):
+    fill_or_clear_data(action)
     return redirect('films:index')
 
 
