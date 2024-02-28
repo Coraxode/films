@@ -2,20 +2,7 @@
 
 Website with list of films.
 
-### Usage
-* configure ```.env``` file
-* create and configure vitrual environment:
-  ```
-  python -m venv venv
-  source venv/bin/activate
-  pip install -r requirements.txt
-  ```
-* start application:
-  ```
-  python manage.py runserver
-  ```
-
-  To use the API, make HTTP requests to the provided endpoints using your preferred HTTP client, such as curl or Postman.
+To use the API, make HTTP requests to the provided endpoints using your preferred HTTP client, such as curl or Postman.
 
 ### Endpoints
 
@@ -39,3 +26,27 @@ Website with list of films.
 * __Retrieve, Update, or Delete film__
     * URL: ```/api/films/<film_id>/```
     * Methods: GET, PUT, PATCH, DELETE
+
+* __API filtering parameters__
+    * URL: ```/api/films/```
+    * by director:
+
+      ```?director=<director id>```
+    * by year:
+      
+      Greater than:
+      ```?year_of_release__gt=<year>```
+  
+      Least than:
+      ```?year_of_release__lt=<year>```
+    * by actors:
+
+      ```?actors=<actor id>```
+    * by page:
+
+      ```?page=<page>```
+ 
+      Example:
+      ```
+      https://films-lake.vercel.app/api/films/?year_of_release__gt=1950&year_of_release__lt=2008&director=1&actors=65&actors=28
+      ```
